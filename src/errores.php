@@ -2,7 +2,7 @@
 /**
  * Retorna errores, si en alguna parte del software se detecta algun error la estatica errores::error se vuelve true
  */
-namespace src;
+namespace gamboamartin\errores;
 
 class errores{
     public static bool $error = false;

@@ -1,7 +1,7 @@
 <?php
 namespace tests\src;
 
-use src\errores;
+use gamboamartin\errores\errores;
 use tests\test;
 
 

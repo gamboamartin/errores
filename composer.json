@@ -1,12 +1,11 @@
 {
-    "vendor/package": "1.0.0",
     "name": "gamboa.martin/errores",
     "description": "Clase para controlar errores",
     "type": "library",
     "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4": {
-            "src\\": "src/",
+            "gamboamartin\\errores\\": "src/",
             "tests\\": "tests/"
         }
     },

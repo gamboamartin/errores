@@ -1,16 +1,22 @@
 {
     "name": "gamboa.martin/errores",
-    "description": "Clase para controlar errrores",
-    "license": [
-        "GPL-3.0-or-later"
-    ],
+    "description": "Clase para controlar errores",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4": {
-            "base\\": "src/"
+            "src\\": "src/",
+            "tests\\": "tests/"
         }
     },
+    "authors": [
+        {
+            "name": "Martin Gamboa",
+            "email": "gamboa.martin@gmail.com"
+        }
+    ],
     "require": {
-        "php": ">=8.1"
+        "php": " >=8.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"

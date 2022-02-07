@@ -2,8 +2,8 @@
 /**
  * Retorna errores, si en alguna parte del software se detecta algun error la estatica errores::error se vuelve true
  */
-namespace errores;
-require '../vendor/autoload.php';
+namespace src;
+
 class errores{
     public static bool $error = false;
     public string $mensaje = '';
@@ -42,7 +42,7 @@ class errores{
     public function error(string $mensaje, mixed $data, string $seccion_header = '', string $accion_header = ''):array{
         $mensaje = trim($mensaje);
         if($mensaje === ''){
-            return $this->error("", $mensaje, $seccion_header ,  $accion_header);
+            return $this->error("Error el mensaje esta vacio", $mensaje, $seccion_header ,  $accion_header);
         }
         $debug = debug_backtrace(2);
 

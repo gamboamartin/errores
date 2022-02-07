@@ -56,3 +56,5 @@ unit_test/prueba.zip
 .phpunit.result.cache
 /.vscode/
 
+
+/vendor/

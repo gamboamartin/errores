@@ -2,7 +2,8 @@
 /**
  * Retorna errores, si en alguna parte del software se detecta algun error la estatica errores::error se vuelve true
  */
-namespace base;
+namespace errores;
+require '../vendor/autoload.php';
 class errores{
     public static bool $error = false;
     public string $mensaje = '';

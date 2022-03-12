@@ -15,8 +15,6 @@ class erroresTest extends test {
 
     public function test_error(){
         unset($_SESSION['error']);
-        $resultado = $this->errores->error('', array());
-
         $this->assertArrayHasKey('error', $this->errores->error('', array()));
         $this->assertArrayHasKey('mensaje', $this->errores->error('', array()));
         $this->assertIsArray( $this->errores->error('', array()));

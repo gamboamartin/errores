@@ -31,6 +31,7 @@ class errores{
     }
 
     /**
+     * PROBADO
      * Si existe algun error se debe llamar esta funcion la cual debera funcionar de manera recursiva
      * para mostrar todos lo errores desde el origen hasta la ejecucion final
      * @param string $mensaje Mensaje a mostrar

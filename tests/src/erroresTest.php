@@ -2,7 +2,7 @@
 namespace tests\src;
 
 use gamboamartin\errores\errores;
-use tests\test;
+use gamboamartin\test\test;
 
 
 class erroresTest extends test {

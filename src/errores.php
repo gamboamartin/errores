@@ -4,6 +4,8 @@
  */
 namespace gamboamartin\errores;
 
+use ReflectionFunction;
+
 class errores{
     public static bool $error = false;
     public string $mensaje = '';
@@ -12,6 +14,7 @@ class errores{
     public string $file = '';
     public string $function = '';
     public mixed $data = '';
+    public array $params = array();
 
 
     public array $upload_errores = array();
@@ -36,14 +39,17 @@ class errores{
      * para mostrar todos lo errores desde el origen hasta la ejecucion final
      * @param string $mensaje Mensaje a mostrar
      * @param mixed $data Complemento y/o detalle de error
+     * @param array $params
      * @param string $seccion_header elemento para regresar a seccion especifica en el controlador
      * @param string $accion_header elemento para regresar a accion especifica en el controlador
      * @return array
      */
-    public function error(string $mensaje, mixed $data, string $seccion_header = '', string $accion_header = ''):array{
+    public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
+                          string $accion_header = ''):array{
+
         $mensaje = trim($mensaje);
         if($mensaje === ''){
-            return $this->error("Error el mensaje esta vacio", $mensaje, $seccion_header ,  $accion_header);
+            return $this->error("Error el mensaje esta vacio", $mensaje, get_defined_vars(), $seccion_header ,  $accion_header);
         }
         $debug = debug_backtrace(2);
 
@@ -60,6 +66,7 @@ class errores{
             $debug[1]['function'] = '';
         }
 
+
         $data_error['error'] = 1;
         $data_error['mensaje'] = '<b><span style="color:red">' . $mensaje . '</span></b>';
         $data_error['file'] = '<b>' . $debug[0]['file'] . '</b>';
@@ -67,6 +74,7 @@ class errores{
         $data_error['class'] = '<b>' . $debug[1]['class'] . '</b>';
         $data_error['function'] = '<b>' . $debug[1]['function'] . '</b>';
         $data_error['data'] = $data;
+        $data_error['params'] = $params;
 
         $_SESSION['error_resultado'][] = $data_error;
 
@@ -83,6 +91,7 @@ class errores{
         $this->line = $debug[0]['line'];
         $this->file = $debug[0]['file'];
         $this->function = $debug[1]['function'];
+        $this->params = $params;
         if($data === null){
             $data = '';
         }

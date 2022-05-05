@@ -45,7 +45,7 @@ class errores{
      * @return array
      */
     public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
-                          string $accion_header = ''):array{
+                          string $accion_header = '', int $registro_id = -1):array{
 
         $mensaje = trim($mensaje);
         if($mensaje === ''){
@@ -83,6 +83,7 @@ class errores{
         if($seccion_header!=='' && $accion_header !=='') {
             $_SESSION['seccion_header'] = $seccion_header;
             $_SESSION['accion_header'] = $accion_header;
+            $_SESSION['registro_id_header'] = $registro_id;
         }
 
         self::$error = true;

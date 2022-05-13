@@ -1,10 +1,10 @@
 <?php
 /**
  * Retorna errores, si en alguna parte del software se detecta algun error la estatica errores::error se vuelve true
+ * @version 1.0.0
  */
 namespace gamboamartin\errores;
 
-use ReflectionFunction;
 
 class errores{
     public static bool $error = false;
@@ -34,14 +34,16 @@ class errores{
     }
 
     /**
-     * PROBADO
+     *
      * Si existe algun error se debe llamar esta funcion la cual debera funcionar de manera recursiva
      * para mostrar todos lo errores desde el origen hasta la ejecucion final
+     * @version 1.0.0
      * @param string $mensaje Mensaje a mostrar
      * @param mixed $data Complemento y/o detalle de error
      * @param array $params
      * @param string $seccion_header elemento para regresar a seccion especifica en el controlador
      * @param string $accion_header elemento para regresar a accion especifica en el controlador
+     * @param int $registro_id id de un modelo de la base de datos
      * @return array
      */
     public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',

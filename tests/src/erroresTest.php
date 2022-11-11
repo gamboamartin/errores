@@ -2,10 +2,11 @@
 namespace tests\src;
 
 use gamboamartin\errores\errores;
-use gamboamartin\test\test;
+
+use PHPUnit\Framework\TestCase;
 
 
-class erroresTest extends test {
+class erroresTest extends TestCase{
     public errores $errores;
     public function __construct(?string $name = null, array $data = [], $dataName = '')
     {

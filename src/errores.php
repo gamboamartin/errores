@@ -77,6 +77,7 @@ class errores{
 
         $data_error['error'] = 1;
         $data_error['mensaje'] = '<b><span style="color:red">' . $mensaje . '</span></b>';
+        $data_error['mensaje_limpio'] = $mensaje;
         $data_error['file'] = '<b>' . $debug[0]['file'] . '</b>';
         $data_error['line'] = '<b>' . $debug[0]['line'] . '</b>';
         $data_error['class'] = '<b>' . $debug[1]['class'] . '</b>';

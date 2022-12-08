@@ -6,6 +6,8 @@
 namespace gamboamartin\errores;
 
 
+use config\generales;
+
 class errores{
     public static bool $error = false;
     public string $mensaje = '';
@@ -45,11 +47,13 @@ class errores{
      * @param string $accion_header elemento para regresar a accion especifica en el controlador
      * @param int $registro_id id de un modelo de la base de datos
      * @param string $fix Mensaje de posible solucion al error
+     * @param bool $aplica_bitacora
      * @return array
      * @version 1.1.0
      */
     public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
-                          string $accion_header = '', int $registro_id = -1, string $fix = ''):array{
+                          string $accion_header = '', int $registro_id = -1, string $fix = '',
+                          bool $aplica_bitacora = false):array{
 
         $mensaje = trim($mensaje);
         if($mensaje === ''){
@@ -109,6 +113,28 @@ class errores{
         }
 
         $this->data = $data;
+        //var_dump($aplica_bitacora);
+        if($aplica_bitacora){
+
+            $ruta_archivos = (new generales())->path_base.'archivos/';
+            if(!file_exists($ruta_archivos)){
+                mkdir($ruta_archivos);
+            }
+            $ruta_archivos = $ruta_archivos.'errores/';
+            if(!file_exists($ruta_archivos)){
+                mkdir($ruta_archivos);
+            }
+            $name_file = 'error_file_'.$this->file.'_line_'.$this->line.'_function_'.$this->function.'_class_'.$this->class
+                .date('Y-m-d H:m:s') .'_'.time().'.log';
+
+            $name_file = str_replace('/', '_', $name_file);
+            $name_file = str_replace('\\', '_', $name_file);
+
+            $ruta_bit_error =$ruta_archivos.$name_file;
+
+            file_put_contents($ruta_bit_error, serialize($data_error));
+
+        }
 
         return $data_error;
     }

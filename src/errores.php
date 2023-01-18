@@ -8,7 +8,7 @@ namespace gamboamartin\errores;
 
 use config\generales;
 
-class errores{
+final class errores{
     public static bool $error = false;
     public string $mensaje = '';
     public string $class ='';
@@ -50,8 +50,9 @@ class errores{
      * @param bool $aplica_bitacora
      * @return array
      * @version 1.1.0
+     * @final revisada
      */
-    public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
+    final public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
                           string $accion_header = '', int $registro_id = -1, string $fix = '',
                           bool $aplica_bitacora = false):array{
 

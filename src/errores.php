@@ -51,6 +51,7 @@ final class errores{
      * @return array
      * @version 1.1.0
      * @final revisada
+     * @por_doc = true
      */
     final public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
                           string $accion_header = '', int $registro_id = -1, string $fix = '',

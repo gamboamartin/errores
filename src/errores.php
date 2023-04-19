@@ -37,21 +37,20 @@ final class errores{
     }
 
     /**
-     * WIKI
      * Si existe algun error se debe llamar esta funcion la cual debera funcionar de manera recursiva
      * para mostrar todos lo errores desde el origen hasta la ejecucion final
+     * @link  https://drive.google.com/file/d/1WTYgD_U3f43n7EyO6551GlS5TiA1qGdg/view?usp=sharing
      * @param string $mensaje Mensaje a mostrar
      * @param mixed $data Complemento y/o detalle de error
-     * @param array $params
+     * @param array $params Parametros de funcion definitiva
      * @param string $seccion_header elemento para regresar a seccion especifica en el controlador
      * @param string $accion_header elemento para regresar a accion especifica en el controlador
      * @param int $registro_id id de un modelo de la base de datos
      * @param string $fix Mensaje de posible solucion al error
-     * @param bool $aplica_bitacora
+     * @param bool $aplica_bitacora Si aplica entonces guarda en un archivo de texto el error
      * @return array
      * @version 1.1.0
-     * @final revisada
-     * @por_doc = true
+
      */
     final public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
                           string $accion_header = '', int $registro_id = -1, string $fix = '',
@@ -115,7 +114,6 @@ final class errores{
         }
 
         $this->data = $data;
-        //var_dump($aplica_bitacora);
         if($aplica_bitacora){
 
             $ruta_archivos = (new generales())->path_base.'archivos/';

@@ -8,7 +8,7 @@ namespace gamboamartin\errores;
 
 use config\generales;
 
-final class errores{
+class errores{
     public static bool $error = false;
     public string $mensaje = '';
     public string $class ='';
@@ -133,10 +133,7 @@ final class errores{
             $ruta_bit_error =$ruta_archivos.$name_file;
 
             file_put_contents($ruta_bit_error, serialize($data_error));
-
         }
-
         return $data_error;
     }
-
 }

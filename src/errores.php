@@ -1,13 +1,14 @@
 <?php
-/**
- * Retorna errores, si en alguna parte del software se detecta algun error la estatica errores::error se vuelve true
- * @version 1.0.0
- */
+
 namespace gamboamartin\errores;
 
 
 use config\generales;
 
+/**
+ * Class errores
+ * Se define el uso general para todos los paquetes de integracion
+ */
 class errores{
     public static bool $error = false;
     public string $mensaje = '';
@@ -39,18 +40,17 @@ class errores{
     /**
      * Si existe algun error se debe llamar esta funcion la cual debera funcionar de manera recursiva
      * para mostrar todos lo errores desde el origen hasta la ejecucion final
-     * @link  https://drive.google.com/file/d/1WTYgD_U3f43n7EyO6551GlS5TiA1qGdg/view?usp=sharing
-     * @param string $mensaje Mensaje a mostrar
-     * @param mixed $data Complemento y/o detalle de error
-     * @param array $params Parametros de funcion definitiva
-     * @param string $seccion_header elemento para regresar a seccion especifica en el controlador
-     * @param string $accion_header elemento para regresar a accion especifica en el controlador
-     * @param int $registro_id id de un modelo de la base de datos
-     * @param string $fix Mensaje de posible solucion al error
-     * @param bool $aplica_bitacora Si aplica entonces guarda en un archivo de texto el error
-     * @return array
-     * @version 1.1.0
-
+     * @param string $mensaje The error message
+     * @param mixed $data The data associated with the error
+     * @param array $params Additional parameters for debugging purposes
+     * @param string $seccion_header The header section
+     * @param string $accion_header The header action
+     * @param int $registro_id The ID of the record
+     * @param string $fix Steps to fix the error
+     * @param bool $aplica_bitacora Flag indicating if the error should be logged
+     * @return array       An array containing the error information
+     * @version 4.1.0
+     * @documentacion finalizada
      */
     final public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
                           string $accion_header = '', int $registro_id = -1, string $fix = '',

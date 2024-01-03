@@ -50,7 +50,7 @@ class errores{
      * @param bool $aplica_bitacora Flag indicating if the error should be logged
      * @return array       An array containing the error information
      * @version 4.1.0
-     * @documentacion finalizada
+     * @pordoc true
      */
     final public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
                           string $accion_header = '', int $registro_id = -1, string $fix = '',

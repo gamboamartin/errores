@@ -39,30 +39,38 @@ class errores{
     }
 
     /**
-     * Si existe algun error se debe llamar esta funcion la cual debera funcionar de manera recursiva
-     * para mostrar todos lo errores desde el origen hasta la ejecucion final
-     * @param string $mensaje The error message
-     * @param mixed $data The data associated with the error
-     * @param array $params Additional parameters for debugging purposes
-     * @param string $seccion_header The header section
-     * @param string $accion_header The header action
-     * @param int $registro_id The ID of the record
-     * @param string $fix Steps to fix the error
-     * @param bool $aplica_bitacora Flag indicating if the error should be logged
-     * @return array       An array containing the error information
+     * POR DOCUMENTAR EN WIKI
+     * Función de manejo de errores.
+     *
+     * @param string $mensaje        El mensaje de error a mostrar
+     * @param mixed  $data           Los datos relacionados con el error
+     * @param string $accion_header  (Opcional) Acción realizada cuando ocurrió el error
+     * @param bool   $aplica_bitacora (Opcional) Si se debe registrar el error en la bitácora o no
+     * @param string $class          (Opcional) La clase donde ocurrió el error
+     * @param bool   $es_final       (Opcional) Si el error es crítico y se debe detener la ejecución
+     * @param string $file           (Opcional) El archivo donde ocurrió el error
+     * @param string $fix            (Opcional) Sugerencia para resolver el error
+     * @param string $funcion        (Opcional) La función donde ocurrió el error
+     * @param string $line           (Opcional) La línea donde ocurrió el error
+     * @param array  $params         (Opcional) Los parámetros de la función donde ocurrió el error
+     * @param int    $registro_id    (Opcional) ID del registro relacionado con el error
+     * @param string $seccion_header (Opcional) Sección en la que ocurrió el error
+     *
+     * @return array Los detalles del error
+     * @version 5.4.0
      */
-    final public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
-                          string $accion_header = '', int $registro_id = -1, string $fix = '',
-                                bool $aplica_bitacora = false, string $file = '', string $line = '',string $class = '',
-                                string $funcion = '', bool $es_final = false):array{
+    final public function error(string $mensaje, mixed $data, string $accion_header = '', bool $aplica_bitacora = false,
+                                string $class = '', bool $es_final = false, string $file = '', string $fix = '',
+                                string $funcion = '', string $line = '', array $params = array(),
+                                int $registro_id = -1, string $seccion_header = ''):array{
 
         $mensaje = trim($mensaje);
         if($mensaje === ''){
             $fix = 'Debes mandar llamar la funcion con un mensaje valido en forma de texto ej ';
             $fix .= ' $error = new errores()';
             $fix .= '$error->error(mensaje: "Mensaje de error descriptivo",data: "datos con el error");';
-            return $this->error("Error el mensaje esta vacio", $mensaje, get_defined_vars(),
-                $seccion_header ,  $accion_header,$registro_id,$fix);
+            return $this->error(mensaje: "Error el mensaje esta vacio", data: $mensaje, accion_header: $accion_header,
+                fix: $fix, params: get_defined_vars(), registro_id: $registro_id, seccion_header: $seccion_header);
         }
         $debug = debug_backtrace(2);
 
@@ -130,8 +138,13 @@ class errores{
         $out .= "File: <b>".$data_error['file']."</b><br>";
         $out .= "Line: <b>".$data_error['line']."</b><br>";
         $out .= "Class: <b>".$data_error['class']."</b><br>";
+        $out .= "Funcion: <b>".$data_error['funcion']."</b><br>";
         if($es_final) {
             $out .= "Datos: <b>" . $datos_error . "</b><br>";
+        }
+        $fix = trim($fix);
+        if($fix!== ''){
+            $out .= "Fix: <b>" . $fix . "</b><br>";
         }
         self::$out[] = $out;
 

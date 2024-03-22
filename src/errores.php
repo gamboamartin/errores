@@ -19,6 +19,7 @@ class errores{
     public mixed $data = '';
     public array $params = array();
     public string $fix = '';
+    public static array $out = array();
 
 
     public array $upload_errores = array();
@@ -90,6 +91,12 @@ class errores{
         $data_error['data'] = $data;
         $data_error['params'] = $params;
         $data_error['fix'] = $fix;
+
+        $out = "Mensaje: <b>".$data_error['mensaje']."</b><br>";
+        $out .= "File: <b>".$data_error['file']."</b><br>";
+        $out .= "Line: <b>".$data_error['line']."</b><br>";
+        $out .= "Class: <b>".$data_error['class']."</b><br>";
+        self::$out[] = $out;
 
         $_SESSION['error_resultado'][] = $data_error;
 

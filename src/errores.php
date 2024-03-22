@@ -138,7 +138,7 @@ class errores{
         $out .= "File: <b>".$data_error['file']."</b><br>";
         $out .= "Line: <b>".$data_error['line']."</b><br>";
         $out .= "Class: <b>".$data_error['class']."</b><br>";
-        $out .= "Funcion: <b>".$data_error['funcion']."</b><br>";
+        $out .= "Funcion: <b>".$data_error['function']."</b><br>";
         if($es_final) {
             $out .= "Datos: <b>" . $datos_error . "</b><br>";
         }

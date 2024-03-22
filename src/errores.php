@@ -50,12 +50,11 @@ class errores{
      * @param string $fix Steps to fix the error
      * @param bool $aplica_bitacora Flag indicating if the error should be logged
      * @return array       An array containing the error information
-     * @version 4.1.0
-     * @pordoc true
      */
     final public function error(string $mensaje, mixed $data, array $params = array(), string $seccion_header = '',
                           string $accion_header = '', int $registro_id = -1, string $fix = '',
-                          bool $aplica_bitacora = false):array{
+                                bool $aplica_bitacora = false, string $file = '', string $line = '',string $class = '',
+                                string $funcion = '', bool $es_final = false):array{
 
         $mensaje = trim($mensaje);
         if($mensaje === ''){
@@ -80,22 +79,60 @@ class errores{
             $debug[1]['function'] = '';
         }
 
+        $file_error = $debug[0]['file'];
+        $file = trim($file);
+        if($file !== ''){
+            $file_error = $file;
+        }
+
+        $class_error = $debug[1]['class'];
+        $class = trim($class);
+        if($class !== ''){
+            $class_error = $class;
+        }
+
+        $funcion_error = $debug[1]['function'];
+        $funcion = trim($funcion);
+        if($funcion !== ''){
+            $funcion_error = $funcion;
+        }
+
+        $line_error = $debug[0]['line'];
+        $line = trim($line);
+        if($line !== ''){
+            $line_error = $line;
+        }
+
 
         $data_error['error'] = 1;
         $data_error['mensaje'] = '<b><span style="color:red">' . $mensaje . '</span></b>';
         $data_error['mensaje_limpio'] = $mensaje;
-        $data_error['file'] = '<b>' . $debug[0]['file'] . '</b>';
-        $data_error['line'] = '<b>' . $debug[0]['line'] . '</b>';
-        $data_error['class'] = '<b>' . $debug[1]['class'] . '</b>';
-        $data_error['function'] = '<b>' . $debug[1]['function'] . '</b>';
+        $data_error['file'] = '<b>' . $file_error . '</b>';
+        $data_error['line'] = '<b>' . $line_error . '</b>';
+        $data_error['class'] = '<b>' . $class_error . '</b>';
+        $data_error['function'] = '<b>' . $funcion_error . '</b>';
         $data_error['data'] = $data;
         $data_error['params'] = $params;
         $data_error['fix'] = $fix;
+
+        $datos_error = '';
+        if($es_final){
+            $datos_error = $data;
+        }
+        if(is_array($datos_error)){
+            $datos_error = serialize($datos_error);
+        }
+        if(is_object($datos_error)){
+            $datos_error = serialize($datos_error);
+        }
 
         $out = "Mensaje: <b>".$data_error['mensaje']."</b><br>";
         $out .= "File: <b>".$data_error['file']."</b><br>";
         $out .= "Line: <b>".$data_error['line']."</b><br>";
         $out .= "Class: <b>".$data_error['class']."</b><br>";
+        if($es_final) {
+            $out .= "Datos: <b>" . $datos_error . "</b><br>";
+        }
         self::$out[] = $out;
 
         $_SESSION['error_resultado'][] = $data_error;

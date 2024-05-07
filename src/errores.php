@@ -39,7 +39,7 @@ class errores{
     }
 
     /**
-     * POR DOCUMENTAR EN WIKI
+     * @url https://github.com/gamboamartin/errores/wiki/errores-error#funci%C3%B3n-error
      * Función de manejo de errores.
      *
      * @param string $mensaje        El mensaje de error a mostrar
